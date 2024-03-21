@@ -1,0 +1,2 @@
+export const mobileSection = 'shadow-xl p-4 mt-3 shadow-purple-800 rounded-xl bg-slate-900 bg-opacity-45 border-b-purple-500 border-[1px] border-t-purple-500 border-l-purple-500 border-r-purple-500';
+export const desktopSection = 'shadow-2xl p-4 shadow-purple-800 rounded-xl bg-slate-900 bg-opacity-45 border-b-purple-500 border-[1px] border-t-purple-500 border-l-purple-500 border-r-purple-500';
