@@ -2,6 +2,9 @@
 
 ## Descrição
 Este é o arquivo README para a aplicação Crypto Currency, uma aplicação web para listagem de criptomoedas e integração com a carteira MetaMask.
+Neste arquivo, haverá as instruções para rodar localmente a aplicação, além disso, há um exemplar com as mesmas funcionalidades hospedado no Firebase.
+
+[Crypto Currency](https://crypto-currency-33a47.web.app/)
 
 ## Pré-requisitos
 Antes de iniciar, certifique-se de ter instalado:
