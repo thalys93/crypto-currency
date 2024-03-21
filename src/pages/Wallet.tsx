@@ -19,20 +19,29 @@ function Wallet() {
   const pressedConnectWallet = async () => {
     if (connected) return console.log('Wallet já conectada!');
     const walletResponse = await connectWallet();
-    setConnected(walletResponse.connectedStatus);
-    setWalletAddress(walletResponse.address);
-    if (walletResponse.connectedStatus) {
-      getUserBalance(walletResponse.address);
+    if (walletResponse.err) {
+      alert(`Meta Mask não está conectado! : ${walletResponse.err}` );
+      return;
+    }
+    if (walletResponse.status === '🦊 Meta Mask não está instalado no navegador!') {
+      alert('Meta Mask não está instalado no navegador!');
+      return;
+    } else {
+      setConnected(walletResponse.connectedStatus);
+      setWalletAddress(walletResponse.address);
+      if (walletResponse.connectedStatus) {
+        getUserBalance(walletResponse.address);
 
-      const walletData = {
-        connected: walletResponse.connectedStatus,
-        address: walletResponse.address,        
+        const walletData = {
+          connected: walletResponse.connectedStatus,
+          address: walletResponse.address,
+        }
+
+        const expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + 1);
+
+        setCookie('walletData', walletData, { path: '/', expires: expirationDate });
       }
-
-      const expirationDate = new Date();
-      expirationDate.setDate(expirationDate.getDate() + 1);
-
-      setCookie('walletData', walletData, { path: '/', expires: expirationDate });
     }
   }
 
@@ -91,7 +100,7 @@ function Wallet() {
       if (cookies.walletData) {
         setConnected(cookies.walletData.connected);
         setWalletAddress(cookies.walletData.address);
-        getUserBalance(cookies.walletData.address);        
+        getUserBalance(cookies.walletData.address);
       }
     }
     checkCookies();
@@ -129,7 +138,7 @@ function Wallet() {
             <div className='bg-slate-700 bg-opacity-35 rounded p-3 mt-3 flex flex-row gap-3 items-center select-none break-all transition-all text-slate-50 hover:text-blue-400'>
               <User size={30} className={windowSize < 768 ? 'mb-[1.9rem]' : ''} />
               <span className='font-Poppins text-2xl'> Conta:
-                {connected ? (                  
+                {connected ? (
                   <span className={windowSize < 768 ? 'text-sm text-slate-500 ml-2' : 'text-sm text-slate-500 ml-2'}>{walletAddress}</span>
                 ) : (
                   <span className='text-rose-500 ml-2'>Desconectado</span>
